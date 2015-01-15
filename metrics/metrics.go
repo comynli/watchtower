@@ -122,6 +122,16 @@ func (m Metrics) ToJsonString() (string, error) {
 	return nil, err
 }
 
+func (m Metrics) ToJsonStream() (io.Reader, error) {
+	var buf bytes.Buffer
+	enc := json.NewEncoder(buf)
+	err := enc.Encode(m)
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
+}
+
 func (m Metrics) ToGob() ([]byte, error) {
 	var buf bytes.Buffer
 	enc := gob.NewEncoder(buf)

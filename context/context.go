@@ -3,6 +3,7 @@ package context
 import (
 	"sync"
 	"strings"
+	"errors"
 )
 
 var (
@@ -16,6 +17,18 @@ func Set(key string, val interface {}) {
 	mutex.Unlock()
 }
 
+
+func BatchSet(keys []string, vals []interface {}) error {
+	if len(keys) != len(vals) {
+		return errors.New("values not match keys")
+	}
+	mutex.Lock()
+	for idx, key := range keys {
+		data[key] = vals[idx]
+	}
+	mutex.Unlock()
+	return nil
+}
 
 func Get(key string) interface {} {
 	mutex.Lock()

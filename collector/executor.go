@@ -186,7 +186,7 @@ func (em *ExecutorManager) checkExecutor(name string, running bool) {
 		cmd := context.GetString(context.GetString("cluster.name") + "::" + "plugin.cmd." + name)
 		maxTime := context.GetInt(context.GetString("cluster.name") + "::" + "plugin.maxTime." + name)
 		interval := context.GetInt(context.GetString("cluster.name") + "::" + "plugin.interval." + name)
-		env := strings.Split(context.GetString(context.GetString("cluster.name") + "::" + "plugin.interval." + name), ";")
+		env := strings.Split(context.GetString(context.GetString("cluster.name") + "::" + "plugin.env." + name), ",")
 		executor := NewExecutor(name, group, cmd, maxTime, interval, env, em.Output)
 		em.executors[name] = executor
 	}

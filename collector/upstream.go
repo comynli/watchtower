@@ -113,7 +113,7 @@ func (us *UpStream) Start(){
 		log.Fatalf("start gob receive fail: %s", err)
 	}
 
-	if context.GetString("cluster.mode") != "storeOnly"{
+	if context.GetString("cluster.mode") != "store"{
 		us.Send()
 	}
 }
